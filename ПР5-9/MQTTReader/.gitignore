@@ -1,0 +1,8 @@
+/ПР5-9/MQTTReader/out
+/.venv
+/out
+/.idea
+__pycache__
+/uv.lock
+/data-20-10-2025-ver52.json
+/data.json
