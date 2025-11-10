@@ -1,10 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from SensorReading3 import SensorReading
+from SensorReading2 import SensorReading
 import json
 from rich.pretty import pprint
 
-with open("./data-20-10-2025-ver3.json", "r", encoding="utf-8") as f:
+with open("./data-10-11-2025-ver2.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 sensor_r_lst = [SensorReading.model_validate(d) for d in data]
@@ -15,7 +15,7 @@ df = pd.DataFrame([r.model_dump() for r in sensor_r_lst])
 df["time"] = pd.to_datetime(df["time"])
 
 #  Список метрик, где 0 считается недопустимым
-metrics = ["illuminance", "voltage", "co2"]
+metrics = ["illuminance", "voltage", "noise"]
 
 #  Удаляем строки, где хотя бы одна из метрик равна 0
 df_filtered = df[~(df[metrics] == 0).any(axis=1)]
@@ -40,7 +40,7 @@ df.index = pd.to_datetime(df.index)
 metrics = {
     "illuminance": "Освещённость (lux)",
     "voltage": "Напряжение (V)",
-    "co2": "CO₂ (ppm)"
+    "noise": "Шумность дБ"
 }
 
 for metric, label in metrics.items():
@@ -73,8 +73,8 @@ for metric, label in metrics.items():
     plt.show()
 
 for metric, label in zip(
-        ["illuminance", "voltage", "co2"],
-        ["Освещённость (lux)", "Напряжение (V)", "CO₂ (ppm)"]
+        ["illuminance", "voltage", "noise"],
+        ["Освещённость (lux)", "Напряжение (V)", "Шумность (дБ)"]
 ):
     plt.figure(figsize=(10, 6))
     plt.plot(df.index, df[metric], label=label, linewidth=1.5)
@@ -90,7 +90,7 @@ for metric, label in zip(
 metrics_labels = {
     "illuminance": "Освещённость (lux)",
     "voltage": "Напряжение (V)",
-    "co2": "CO₂ (ppm)"
+    "noise": "Шумность дБ"
 }
 
 for metric, metric_label in metrics_labels.items():
