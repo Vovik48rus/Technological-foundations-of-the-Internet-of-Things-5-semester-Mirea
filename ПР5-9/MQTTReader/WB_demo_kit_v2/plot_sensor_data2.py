@@ -1,10 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from SensorReading2 import SensorReading
+from WB_demo_kit_v2.SensorReading2 import SensorReading
 import json
 from rich.pretty import pprint
 
-with open("./data-10-11-2025-ver2.json", "r", encoding="utf-8") as f:
+with open("../data-10-11-2025-ver2.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 sensor_r_lst = [SensorReading.model_validate(d) for d in data]

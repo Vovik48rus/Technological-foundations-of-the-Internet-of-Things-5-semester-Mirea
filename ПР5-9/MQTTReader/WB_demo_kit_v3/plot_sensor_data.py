@@ -4,7 +4,7 @@ from SensorReading3 import SensorReading
 import json
 from rich.pretty import pprint
 
-with open("./data-20-10-2025-ver3.json", "r", encoding="utf-8") as f:
+with open("../data-20-10-2025-ver3.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 sensor_r_lst = [SensorReading.model_validate(d) for d in data]
